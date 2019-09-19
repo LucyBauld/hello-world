@@ -1,12 +1,55 @@
-SELECT TOP (1000) [CarID]
-      ,[CarModelName]
-      ,[ManufacturerID]
-  FROM [Cars].[dbo].[Car Models]  
-  
-  SELECT TOP (1000) [ManufacturerID]
-      ,[ManufacturerName]
-      ,[ManufacturerCountry]
-  FROM [Cars].[dbo].[Manufaturer]
+USE [Cars]
+GO
+
+/****** Object:  Table [dbo].[Car Models]    Script Date: 19/09/2019 16:08:48 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Car Models](
+	[CarID] [int] NOT NULL,
+	[CarModelName] [nvarchar](30) NOT NULL,
+	[ManufacturerID] [int] NOT NULL,
+ CONSTRAINT [PK_Car Models] PRIMARY KEY CLUSTERED 
+(
+	[CarID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Car Models] ADD  DEFAULT ((1)) FOR [ManufacturerID]
+GO
+
+ALTER TABLE [dbo].[Car Models]  WITH CHECK ADD  CONSTRAINT [fk_manufacturer_id] FOREIGN KEY([ManufacturerID])
+REFERENCES [dbo].[Manufaturer] ([ManufacturerID])
+GO
+
+ALTER TABLE [dbo].[Car Models] CHECK CONSTRAINT [fk_manufacturer_id]
+GO
+
+
+USE [Cars]
+GO
+
+/****** Object:  Table [dbo].[Manufaturer]    Script Date: 19/09/2019 16:09:34 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Manufaturer](
+	[ManufacturerID] [int] NOT NULL,
+	[ManufacturerName] [nvarchar](30) NOT NULL,
+	[ManufacturerCountry] [nvarchar](20) NOT NULL,
+ CONSTRAINT [PK_Manufaturer] PRIMARY KEY CLUSTERED 
+(
+	[ManufacturerID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
 
 CREATE VIEW [dbo].[Car Manufacturers] AS
 SELECT [Car Models].CarID, CarModelName, Manufaturer.ManufacturerCountry, ManufacturerName

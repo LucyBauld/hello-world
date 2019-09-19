@@ -1,3 +1,13 @@
+SELECT TOP (1000) [CarID]
+      ,[CarModelName]
+      ,[ManufacturerID]
+  FROM [Cars].[dbo].[Car Models]  
+  
+  SELECT TOP (1000) [ManufacturerID]
+      ,[ManufacturerName]
+      ,[ManufacturerCountry]
+  FROM [Cars].[dbo].[Manufaturer]
+
 CREATE VIEW [dbo].[Car Manufacturers] AS
 SELECT [Car Models].CarID, CarModelName, Manufaturer.ManufacturerCountry, ManufacturerName
 FROM dbo.[Car Models] INNER JOIN dbo.Manufaturer
